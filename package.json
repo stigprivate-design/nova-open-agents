@@ -1,0 +1,20 @@
+{
+  "name": "nova-open-agents",
+  "version": "1.1.0",
+  "description": "Open source legal, compliance, regulatory, case law and risk agents powered by NovaCopilot agent objects.",
+  "license": "Apache-2.0",
+  "author": "Valkiv Ventures AB (https://valkivventures.com)",
+  "homepage": "https://explorecopilotai.com",
+  "repository": { "type": "git", "url": "https://github.com/stigprivate-design/nova-open-agents.git" },
+  "keywords": ["regtech", "compliance", "legal", "ai-agents", "gdpr", "dora", "ai-act", "case-law", "mcp"],
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": ["dist", "README.md", "LICENSE", "NOTICE"],
+  "engines": { "node": ">=18" },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "test": "node --experimental-strip-types --test tests/*.test.ts"
+  },
+  "devDependencies": { "typescript": "^5.7.0" }
+}

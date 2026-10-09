@@ -1,0 +1,22 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "nova-open-agents"
+version = "1.1.0"
+description = "Open source legal, compliance, regulatory, case law and risk agents powered by NovaCopilot agent objects."
+readme = "README.md"
+license = { text = "Apache-2.0" }
+authors = [{ name = "Valkiv Ventures AB" }]
+requires-python = ">=3.9"
+dependencies = []
+keywords = ["regtech", "compliance", "legal", "ai-agents", "gdpr", "dora", "case-law"]
+
+[project.urls]
+Homepage = "https://explorecopilotai.com"
+Source = "https://github.com/stigprivate-design/nova-open-agents"
+Publisher = "https://valkivventures.com"
+
+[tool.setuptools]
+py-modules = ["nova"]
