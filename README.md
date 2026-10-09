@@ -5,6 +5,7 @@ Open source legal, compliance and regulatory agents from [NovaCopilot](https://e
 The agents use ready machine-readable agent objects from NovaCopilot (obligations, deadlines, risk, sanctions, case law, evidence chain), so you do not need your own RAG, GPU or rule interpretation.
 
 Website: https://explorecopilotai.com
+Publisher: Valkiv Ventures AB, https://valkivventures.com
 
 ## Agents
 - **Legal agent**: "What applies?" Provision node with case law and evidence chain.
