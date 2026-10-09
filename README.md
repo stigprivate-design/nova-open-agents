@@ -1,13 +1,14 @@
 # NovaCopilot Open Agents
 
 [![License](https://img.shields.io/badge/license-Apache%202.0-blue.svg)](LICENSE)
-![Version](https://img.shields.io/badge/version-1.1.0-informational)
+![Version](https://img.shields.io/badge/version-1.2.0-informational)
 ![Dependencies](https://img.shields.io/badge/dependencies-0-brightgreen)
 
 Open source legal, compliance and regulatory agents from [NovaCopilot](https://explorecopilotai.com). Free for companies, municipalities and public bodies. No key, no contract, no pilot.
 
 The agents return ready machine-readable agent objects (obligations, deadlines, risk, sanctions, case law, evidence chain), so you do not need your own RAG, GPU or rule interpretation. They work without a language model; plug them into any assistant when you want natural language on top.
 
+Documentation: https://stigprivate-design.github.io/nova-open-agents-docs/
 Website: https://explorecopilotai.com
 Publisher: Valkiv Ventures AB, https://valkivventures.com
 
@@ -17,7 +18,7 @@ Publisher: Valkiv Ventures AB, https://valkivventures.com
 |---|---|---|
 | `legalAgent` | What applies? | Provision node with case law and evidence chain (SE, NO, US, EU) |
 | `complianceAgent` | What must we do? | Obligations from a company profile (country, industry, employees, turnover) |
-| `regulatoryAgent` | What changed this week? | GDPR, DORA, AI Act, NIS2, CSRD with the official EUR-Lex version |
+| `regulatoryAgent` | What changed this week? | GDPR, DORA, AI Act, NIS2, CSRD, eIDAS, MiCA, DSA, Data Act, AMLR with Official Journal dates and the current EUR-Lex version |
 | `caseLawAgent` | How have courts decided? | Hash-chained case law lines per act: EU, US (incl. Supreme Court), Sweden, Norway |
 | `riskAgent` | What do we risk? | Risk objects, sanctions and supervisory decisions in one answer |
 
@@ -29,33 +30,30 @@ Publisher: Valkiv Ventures AB, https://valkivventures.com
 - **Daily verification.** Official sources (EUR-Lex, national courts and registers) are checked daily.
 - **Zero dependencies.** The Python SDK uses only the standard library; the TypeScript SDK uses `fetch`.
 
-## Install
-
-```bash
-npm install nova-open-agents        # TypeScript / Node 18+
-pip install nova-open-agents        # Python 3.9+
-```
-
-Or copy `sdk/` and `agents/` directly; the code is small on purpose.
-
 ## Quick start
 
-```ts
-import { riskAgent, caseLawAgent, complianceAgent } from "nova-open-agents";
+```bash
+git clone https://github.com/stigprivate-design/nova-open-agents
+cd nova-open-agents
+node --experimental-strip-types examples/risk-and-case-law.ts
+```
 
+```ts
+import { regulatoryAgent, riskAgent, caseLawAgent } from "./index.ts";
+
+const mica = await regulatoryAgent("mica");
 const risk = await riskAgent("gdpr");
 const cases = await caseLawAgent("sherman-act", "us");
-const duties = await complianceAgent({ country: "se", industry: "finance", employees: 120 });
-console.log(risk.proof, cases.objects, duties.objects);
+console.log(mica.proof, risk.objects, cases.objects);
 ```
 
 ```python
-from nova import risk_agent, case_law_agent
-print(risk_agent("gdpr")["objects"]["sanctions"]["count"])
-print(case_law_agent("straffeloven", "no")["proof"])
+from nova import regulatory_agent, risk_agent
+print(regulatory_agent("dora")["objects"]["official_text"])
+print(risk_agent("gdpr")["proof"])
 ```
 
-More in [`examples/`](examples).
+npm and PyPI packages (`nova-open-agents`) are prepared and will be published shortly. More in [`examples/`](examples).
 
 ## MCP
 

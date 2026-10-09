@@ -2,10 +2,11 @@
 # No dependencies beyond the Python standard library.
 import hashlib, json, urllib.error, urllib.parse, urllib.request
 
-__version__ = "1.1.0"
+__version__ = "1.2.0"
 NOVA_BASE = "https://legal.exploreworldai.com/api/public/v1"
 USER_AGENT = f"NovaOpenAgent/{__version__} (+https://legal.exploreworldai.com/en/open-agents)"
 SOURCE = "Source: NovaCopilot"
+REGULATIONS = ("gdpr", "dora", "ai-act", "nis2", "csrd", "eidas", "mica", "dsa", "data-act", "amlr")
 
 
 def build_url(path, **params):
@@ -48,7 +49,7 @@ def compliance_agent(country, industry=None, employees=None, turnover_eur=None):
 
 
 def regulatory_agent(regulation):
-    r = fetch_nova("regulation-week", regulation=regulation)
+    r = fetch_nova("regulation-week", reg=regulation)
     return _answer("regulatory", "What changed this week?", r["data"], [_proof(r)])
 
 
@@ -71,4 +72,4 @@ def risk_agent(act, role=None, jurisdiction=None, country=None):
 
 
 if __name__ == "__main__":
-    print(json.dumps(risk_agent("gdpr")["objects"]["sanctions"].get("count"), indent=2))
+    print(json.dumps(regulatory_agent("mica")["objects"].get("official_text"), indent=2))

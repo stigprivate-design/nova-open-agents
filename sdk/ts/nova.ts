@@ -1,8 +1,9 @@
 // NovaCopilot Open Agents SDK (Apache 2.0). Data is delivered by NovaCopilot; the license covers the code.
-export const SDK_VERSION = "1.1.0";
+export const SDK_VERSION = "1.2.0";
 export const NOVA_BASE = "https://legal.exploreworldai.com/api/public/v1";
 export const USER_AGENT = `NovaOpenAgent/${SDK_VERSION} (+https://legal.exploreworldai.com/en/open-agents)`;
 
+export type Regulation = "gdpr" | "dora" | "ai-act" | "nis2" | "csrd" | "eidas" | "mica" | "dsa" | "data-act" | "amlr";
 export type Jurisdiction = "eu" | "us" | "se" | "no";
 export type NovaResult<T = any> = { data: T; url: string; proof?: string; receipt_sha256: string; source: "Source: NovaCopilot" };
 
@@ -35,7 +36,7 @@ export const nova = {
   provisionNode: (id: string) => fetchNova("provision-node", { id }),
   graph: (graph: "obligation" | "provenance" | "action", params: Record<string, string> = {}) => fetchNova(`graph/${graph}`, params),
   decision: (profile: Record<string, string | number>) => fetchNova("decision", profile),
-  regulationWeek: (regulation: string) => fetchNova("regulation-week", { regulation }),
+  regulationWeek: (regulation: string) => fetchNova("regulation-week", { reg: regulation }),
   praxisLine: (act: string, jurisdiction: Jurisdiction = "eu", limit?: number) => fetchNova("praxis-line", { act, jurisdiction, limit }),
   judgment: (id: string, jurisdiction: Jurisdiction = "eu") => fetchNova(`${jurisdiction}-praxis/agent`, { id }),
   riskObjects: (q: { act?: string; role?: string; jurisdiction?: string }) => fetchNova("risk-assess", q),

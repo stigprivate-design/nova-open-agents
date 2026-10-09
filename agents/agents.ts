@@ -1,5 +1,5 @@
 // Five open agents (Apache 2.0). Work without a language model: answers are ready agent objects with proof.
-import { nova, type Jurisdiction, type NovaResult } from "../sdk/ts/nova.ts";
+import { nova, type Jurisdiction, type NovaResult, type Regulation } from "../sdk/ts/nova.ts";
 
 export type AgentName = "legal" | "compliance" | "regulatory" | "case-law" | "risk";
 export type Proof = { source_url: string; proof?: string; receipt_sha256: string };
@@ -27,8 +27,8 @@ export async function complianceAgent(profile: { country: string; industry?: str
   return wrap("compliance", "What must we do?", await nova.decision(profile as Record<string, string | number>));
 }
 
-/** Regulatory agent: What changed this week? */
-export async function regulatoryAgent(regulation: "gdpr" | "dora" | "ai-act" | "nis2" | "csrd") {
+/** Regulatory agent: What changed this week? Ten EU acts with official dates and consolidated version. */
+export async function regulatoryAgent(regulation: Regulation) {
   return wrap("regulatory", "What changed this week?", await nova.regulationWeek(regulation));
 }
 
